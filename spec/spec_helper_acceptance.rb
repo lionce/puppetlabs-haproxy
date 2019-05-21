@@ -65,6 +65,7 @@ RSpec.configure do |c|
       on host, puppet('module', 'install', 'puppetlabs-concat'), acceptable_exit_codes: [0, 1]
       if fact('osfamily') == 'RedHat'
         on host, puppet('module', 'install', 'stahnma/epel'), acceptable_exit_codes: [0, 1]
+        shell(%(yum clean all && yum update nss))
       end
       if fact('operatingsystem') == 'Debian'
         on host, puppet('module', 'install', 'puppetlabs-apt'), acceptable_exit_codes: [0, 1]
